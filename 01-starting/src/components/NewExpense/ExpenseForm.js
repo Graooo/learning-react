@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm = ({ onAddExpense }) => {
+const ExpenseForm = ({ onAddExpense, stopAddingHandler }) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
@@ -20,7 +20,7 @@ const ExpenseForm = ({ onAddExpense }) => {
     event.preventDefault();
     const expenseData = {
       title,
-      amount,
+      amount: +amount,
       date: new Date(date),
     };
     onAddExpense(expenseData);
@@ -58,6 +58,9 @@ const ExpenseForm = ({ onAddExpense }) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="submit" onClick={stopAddingHandler}>
+          Cancel
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
